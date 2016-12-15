@@ -5,55 +5,55 @@
 
 {% block content %}
 
-        <div class="allpagecontent">
+<main class="main-content-color">
 
-            <div class="formcontainer" >
+    <div class="subcontainer postshadoweffect">
+        <div class="signupcontainer">
+            <div class="pagetitle">
+                <h1> Signup </h1>
+            </div>
 
-                <div class="pagetitle">
-                    <h1> Signup </h1>
-                </div>
-                <!--username-->
-                <form method="post" class="blogcontent">
+            <form method="post" class="blogcontent">
 
-                    <div class="formelements">
-                        <small>Username</small>
-                        <input type = "text" name="username"  value={{input_username}}>
-                        <p class="error">{{username_error}}</p>
-                        <p class="error">{{userexists_error}}</p>
-                    </div>
-
-                    <!--password-->
-                    <div class="formelements">
-                        <small>Password</small>
-                        <input type = "password" name="password" value={{input_password}}>
-                        <p class="error">{{password_error}}</p>
-                    </div>
-
-                    <!--verify password-->
-                    <div class="formelements">
-                        <small>Verify Password</small>
-                        <input type = "password" name="verify" value={{input_verify}}>
-                        <p class="error">{{verify_error}}</p>
-                    </div>
-
-                    <!--email (optional)-->
-                    <div class="formelements">
-                        <small>Email (optional)</small>
-                        <input type = "text" name="email" value={{input_email}}>
-                        <p class="error">{{email_error}}</p>
-                    </div>
-
-                    <!--submit-->
-                    <div class="formelements btn-div">
-                        <button class = "btn is-green-btn btn-ext-sign1" name="subject" type="submit">Sign up</button>
-                    </div>
-
-                </form>
-
-                <div class="formelements signup btn-div">
-                    <a class = "btn is-green-btn btn-ext-sign1" href = "/signin">Already have an account? Sign in</a>
+                <div class="formelements">
+                    <small>Username</small>
+                    <input type = "text" name="username"  value={{input_username}}>
+                    <p class="error">{{username_error}}</p>
+                    <p class="error">{{userexists_error}}</p>
                 </div>
 
+                <!--password-->
+                <div class="formelements">
+                    <small>Password</small>
+                    <input type = "password" name="password" value={{input_password}}>
+                    <p class="error">{{password_error}}</p>
+                </div>
+
+                <!--verify password-->
+                <div class="formelements">
+                    <small>Verify Password</small>
+                    <input type = "password" name="verify" value={{input_verify}}>
+                    <p class="error">{{verify_error}}</p>
+                </div>
+
+                <!--email (optional)-->
+                <div class="formelements">
+                    <small>Email (optional)</small>
+                    <input type = "text" name="email" value={{input_email}}>
+                    <p class="error">{{email_error}}</p>
+                </div>
+
+                <!--submit-->
+                <div class="formelements btn-div">
+                    <button class = "btn is-green-btn btn-ext-sign1" name="subject" type="submit">Sign up</button>
+                </div>
+
+            </form>
+
+            <div class="formelements signup btn-div">
+                <a class = "btn is-green-btn btn-ext-sign1" href = "/signin">Already have an account? Sign in</a>
             </div>
         </div>
+    </div>
+</main>
 {% endblock %}

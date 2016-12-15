@@ -5,6 +5,8 @@ import re
 import hashlib
 from datetime import datetime
 from google.appengine.ext import db
+import random
+from string import letters
 
 
 
@@ -19,7 +21,6 @@ jinja_env.filters['datetimeformat'] = datetimeformat
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASSWORD_RE = re.compile(r"^.{3,20}$")
 EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
-
 
 # parent handler for all rendering
 class Handler(webapp2.RequestHandler):
@@ -63,7 +64,7 @@ class SignupHandler(Handler):
     def get(self):
         cookie_username = self.checkLoggedInUser()
         if cookie_username:
-            self.redirect('/')
+            self.redirect('/') # redirect to home if already logged in
         else:
             self.render_front()
 
@@ -104,9 +105,11 @@ class SignupHandler(Handler):
                 error = True
 
         if not error:
-            secure_password = make_secure_val(input_password)
+            secure_password = make_pw_hash(input_username, input_password)
             current_user = BlogUser(username = input_username, password = secure_password, email = input_email)
             current_user.put()      # save new user
+
+            # login
             self.response.headers.add_header('Set-Cookie',
                     str('username=' + make_secure_val(input_username) + '; Path=/')) # write cookie
             # redirect to Welcome page
@@ -226,7 +229,7 @@ class NewpostHandler(Handler):
 
         else:
             error = "Enter both, post title and post content."
-            self.render_front(input_subject, input_content, error)
+            self.render_front(cookie_username = username, input_subject=input_subject, input_content=input_content, error=error)
 
 
 class BlogFrontHandler(Handler):
@@ -344,8 +347,8 @@ class EditHandler(Handler):
             post_id = input_post.key().id()
             self.redirect("/post/" + str(post_id))
         else:
-            error = "Enter both, post title and post content."
-            self.render_front(cookie_username = username, post = input_post, error = error)
+            error = "Something was missed, enter both, post title and post content."
+            self.render_front(cookie_username = username, post = input_post, postid = input_post_id, error = error)
 
 class DeleteHandler(Handler):
     def post(self):
@@ -527,7 +530,7 @@ def allusers():
 def valid_signin(username, password):
     q = db.GqlQuery("select * from BlogUser where username = :1", username)
     for u in q.run():
-        if check_secure_val(u.password) == password:
+        if valid_pw(username, password, u.password):
             return True
         else:
             return False
@@ -556,7 +559,21 @@ def check_secure_val(h):
     if h == make_secure_val(str):
         return str
 
+# got from hw4
+def make_salt(length = 5):
+    return ''.join(random.choice(letters) for x in xrange(length))
 
+def make_pw_hash(name, pw, salt = None):
+    if not salt:
+        salt = make_salt()
+    h = hashlib.sha256(name + pw + salt).hexdigest()
+    return '%s,%s' % (salt, h)
+
+def valid_pw(name, password, h):
+    salt = h.split(',')[0]
+    return h == make_pw_hash(name, password, salt)
+
+# end of copy
 # all web handlers
 app = webapp2.WSGIApplication([(r"/newpost", NewpostHandler),
                               (r"/", BlogFrontHandler),

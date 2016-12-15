@@ -7,13 +7,13 @@
 
 {% block content %}
 
-<div class="allpagecontent">
+<main class="main-content-color">
 
     <div class="row share">
-        <h1>Share something, write a blog...</h1>
+        <h1>Share something, write a post...</h1>
     </div>
 
-    <div>
+    <article class="subcontainer postshadoweffect">
         <form method="post">
             <div class="row newtitle">
                 <small>Give it a title</small>
@@ -26,16 +26,18 @@
             </div>
 
             <div class="error">
-                <small>{{error}} </small>
+                {{error}}
             </div>
 
-            <div >
-                <input class="submitstyle" type="submit">
+            <div class="btn is-green-btn btn-ext">
+                <button>Save Post</button>
             </div>
+
+            <a class="btn is-green-btn btn-ext" href="/">Discard Changes</a>
 
         </form>
-    </div>
-</div>
+    </article>
+</main>
 
 <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
 <script>tinymce.init({

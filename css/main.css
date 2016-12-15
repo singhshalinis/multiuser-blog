@@ -251,7 +251,15 @@ h1, h3, h2, h4, h5, p, img, form{
     padding: 0 10px;
 }
 
+.signupcontainer {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
 
+.signup {
+    font-size: 0.9em;
+}
 /* New Post */
 .newblogposts {
     margin-top: 30px;
@@ -375,9 +383,6 @@ button {
     transition: all 0.3s ease-out;
     display: inline-block;
     background: rgba(63, 173, 111, 0);
-
-
-    /*min-width: 50px;*/
 }
 
 .btn-ext {
@@ -407,7 +412,7 @@ div.is-green-btn:focus button{
 .is-heart-btn:hover,
 .is-heart-btn:focus{
   color: rgb(255, 0, 0);
-  cursor:default
+  cursor:pointer;
 }
 
 
@@ -509,8 +514,7 @@ div.is-green-btn:focus button{
     color: #5BA8DA;
 }
 .disqus-box {
-    margin:20px;
-    width:50%;
+    width:100%;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }

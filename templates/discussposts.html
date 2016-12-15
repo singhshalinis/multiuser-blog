@@ -18,56 +18,80 @@
         <h2>{{error}}</h2>
     </div>
 
-    <article class="container postcontainer postshadoweffect">
+    <article class="subcontainer postshadoweffect">
         <!--Edit - Delete only if it is the current user's post -->
-            <div class="container row edit-del">
-                <div class="author">
-                    <h3>
-                        <i class="fa fa-user user-icon"></i>
-                        <a class=" " href="/profile">{{post.writer.username}}</a>
-                    </h3>
-                </div>
 
-                {% if cookie_username == post.writer.username %}
-                <div class="edit is-green-btn">
-                    <a class="btn is-a" href="/edit?postid={{post.key().id()}}">Edit</a>
-                </div>
+        <div class="row gendisplay">
 
-                <div class="delete">
+            <div class="author">
+
+                <div class="user-circle"><i class="fa fa-user user-icon"></i></div>
+                <a href="/profile"><span class="green">{{post.writer.username}}</span></a>
+
+            </div>
+
+            {% if cookie_username == post.writer.username %}
+            <div class="edit-del">
+
+                <a class="edit btn is-green-btn btn-ext" href="/edit?postid={{post.key().id()}}">Edit</a>
+
+                <div class="delete btn is-green-btn btn-ext">
                     <form id="delform" method="post" action="/delete">
                         <input type="hidden" name="postid" value={{post.key().id()}}>
                         <input type="hidden" name="postkey" value="{{post.key()}}">
-                        <button class="btn is-green-btn" onclick="delFunc()">Delete</button>
+                        <button class="" onclick="return delFunc()">Delete</button>
                     </form>
                 </div>
-                {% endif %}
-            </div>
-            <!--Post Title & Date -->
+            {% endif %}
 
-            <div class="container row blogheader">
-                <div class="blogtitle">
-                    <h4 >
-                        {{post.title | safe }} <!-- note the diff: title vs subject -->
-                    </h4>
-                </div>
-                <div class="blogdate">
-                    <h4>
-                        {{post.created|datetimeformat}}
-                    </h4>
-                </div>
-            </div>
+        </div>
+        <!--Post Title & Date -->
 
-        <div class="row hralign">
+        <div class="row gendisplay blogheader">
+            <div class="blogtitle">
+                {{post.title }} <!-- note the diff: title vs subject -->
+            </div>
+            <div class="blogdate">
+                {{post.created|datetimeformat}}
+            </div>
+        </div>
+
+        <div class="row gendisplay hralign">
             <hr class="hrsize2"/>
         </div>
 
-        <div class="container row blogcontent">
+        <div class="row gendisplay blogcontent">
             <p>{{post.content | safe}}</p>
         </div>
 
-        <div class="container row social">
+        <div class="row gendisplay">
+            <p class="dots">.......</p>
+        </div>
+
+
+        <div class="row gendisplay lk-cmnt">
+
             <div class="likes">
-                <a href="#"><img width=25px height=25px src="/images/like.png"></a>
+                {% if post.writer.username == cookie_username or not cookie_username: %}
+                <!-- no option to like for current user's post and guests -->
+                    <div>
+                        Liked by {{post.likes}}
+                    </div>
+                {% else: %}
+                    <form id="likeform" method="post" action="/like">
+                        <input type="hidden" name="postid" value={{post.key().id()}}>
+                        {% if post.key().id() in user_liked: %}
+                            <button><i class="fa fa-heart red" aria-hidden="true"></i></button>
+                        {% else: %}
+                            <button class="is-heart-btn"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                        {% endif%}
+                        <span class="like-number green">{{post.likes}}</span>
+                    </form>
+                {% endif %}
+
+            </div>
+            <div class="comments" >
+                <a class="comments green" href="/discussposts/{{post.key().id()}}#disqus_thread">Comments</a>
             </div>
         </div>
     </article>
