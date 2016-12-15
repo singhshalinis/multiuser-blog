@@ -1,5 +1,5 @@
 Multiuser Blog
-
+===============
 
 What is it? (Functionality)
 ---------------------------
