@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Yellow Blog</title>
+        <!--CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/responsive.css">
+
+        <!--Meta-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
+        <div class="container shadoweffect">
+            <header class="container row header-color">
+                <div class="title-logo">
+                    <a href="/"><img class="logo-image" src="images/logo-100.png"
+                         srcset="images/logo-100.png 100w,
+                                 images/logo-200.png 200w,
+                                 images/logo-500.png 500w" alt="Company Logo">
+                    </a>
+                </div>
+
+                <div class="title-desc">
+                    <div class="header">
+                        <h1> The <span class="yellow">Yellow </span> Blog </h1>
+                    </div>
+                    <nav class="navlinks">
+                        {% block pagenavitems %}
+                            <!--Navigation -->
+                        {% endblock %}
+                    </nav>
+                </div>
+
+            </header>
+            {% block content %}
+            {% endblock %}
+
+            <footer class="row">
+                <h5 class="footeritems">&copy; 2016 The Yellow Company</h5>
+                <nav>
+                    <a class="navitems" href="/about">About </a> |
+                    <a class="navitems" href="/contact">Contact</a>
+                </nav>
+            </footer>
+        </div>
+    </body>
+</html>

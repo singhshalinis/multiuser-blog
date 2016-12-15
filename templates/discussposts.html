@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block pagenavitems %}
+    {% if not cookie_username: %}
+        <a class="navitems" href="/signin">Sign in </a>|
+        <a class="navitems" href="/signup">Sign up</a><!--conditional signin/signout/username-->
+    {% else %}
+        <a class="navitems" href="/profile">{{cookie_username}}</a> | <!-- <TO-DO>show profile -->
+        <a class="navitems" href="/newpost">write a story</a> |
+        <a class="navitems" href="/signout">Sign out</a><!--conditional signin/signout/username-->
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+<main class="main-content-color">
+    <div class="row error">
+        <h2>{{error}}</h2>
+    </div>
+
+    <article class="container postcontainer postshadoweffect">
+        <!--Edit - Delete only if it is the current user's post -->
+            <div class="container row edit-del">
+                <div class="author">
+                    <h3>
+                        <i class="fa fa-user user-icon"></i>
+                        <a class=" " href="/profile">{{post.writer.username}}</a>
+                    </h3>
+                </div>
+
+                {% if cookie_username == post.writer.username %}
+                <div class="edit is-green-btn">
+                    <a class="btn is-a" href="/edit?postid={{post.key().id()}}">Edit</a>
+                </div>
+
+                <div class="delete">
+                    <form id="delform" method="post" action="/delete">
+                        <input type="hidden" name="postid" value={{post.key().id()}}>
+                        <input type="hidden" name="postkey" value="{{post.key()}}">
+                        <button class="btn is-green-btn" onclick="delFunc()">Delete</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            <!--Post Title & Date -->
+
+            <div class="container row blogheader">
+                <div class="blogtitle">
+                    <h4 >
+                        {{post.title | safe }} <!-- note the diff: title vs subject -->
+                    </h4>
+                </div>
+                <div class="blogdate">
+                    <h4>
+                        {{post.created|datetimeformat}}
+                    </h4>
+                </div>
+            </div>
+
+        <div class="row hralign">
+            <hr class="hrsize2"/>
+        </div>
+
+        <div class="container row blogcontent">
+            <p>{{post.content | safe}}</p>
+        </div>
+
+        <div class="container row social">
+            <div class="likes">
+                <a href="#"><img width=25px height=25px src="/images/like.png"></a>
+            </div>
+        </div>
+    </article>
+
+    <div class="row disqus-box">
+        <div class="disqus-styles" id="disqus_thread"></div>
+    </div>
+</main>
+
+<script>
+    function delFunc() {
+        if (confirm("Do you want to delete this post?")) {
+            document.getElementById("delform");
+            delform.submit();
+        }
+    }
+</script>
+
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+//this.page.url = "/discusspost";  // Replace PAGE_URL with your page's canonical URL variable
+//this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//ssdisqus.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+{% endblock %}

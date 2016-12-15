@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+
+{% block pagenavitems %}
+    {% if not cookie_username: %}
+        <a class="navitems" href="/signin">Sign in </a> |
+        <a class="navitems" href="/signup">Sign up</a><!--conditional signin/signout/username-->
+    {% else %}
+        <a class="hello" href="/profile">Hello <span class="helloname">{{cookie_username}}</span></a> |
+        <a class="navitems" href="/newpost">write a story</a> |
+        <a class="navitems" href="/signout">Sign out</a><!--conditional signin/signout/username-->
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+<main class="main-content-color">
+
+    <div class="row error">
+        <h2>{{error}}</h2>
+    </div>
+
+    {% if not posts:%}
+        <div class="noposts">
+            <h2>No posts yet! Write a story and post it now.</h2>
+        </div>
+    {% endif %}
+
+    {% for post in posts %}
+    <article class="subcontainer postshadoweffect">
+        <!--Edit - Delete only if it is the current user's post -->
+
+        <div class="row gendisplay">
+
+            <div class="author">
+
+                <div class="user-circle"><i class="fa fa-user user-icon"></i></div>
+                <a href="/profile"><span class="green">{{post.writer.username}}</span></a>
+
+            </div>
+
+            {% if cookie_username == post.writer.username %}
+            <div class="edit-del">
+
+                <a class="edit btn is-green-btn btn-ext" href="/edit?postid={{post.key().id()}}">Edit</a>
+
+                <div class="delete btn is-green-btn btn-ext">
+                    <form id="delform" method="post" action="/delete">
+                        <input type="hidden" name="postid" value={{post.key().id()}}>
+                        <input type="hidden" name="postkey" value="{{post.key()}}">
+                        <button class="" onclick="return delFunc()">Delete</button>
+                    </form>
+                </div>
+            {% endif %}
+
+        </div>
+        <!--Post Title & Date -->
+
+        <div class="row gendisplay blogheader">
+            <div class="blogtitle">
+                {{post.title }} <!-- note the diff: title vs subject -->
+            </div>
+            <div class="blogdate">
+                {{post.created|datetimeformat}}
+            </div>
+        </div>
+
+        <div class="row gendisplay hralign">
+            <hr class="hrsize2"/>
+        </div>
+
+        <div class="row gendisplay blogcontent">
+            <p>{{post.content | safe}}</p>
+        </div>
+
+        <div class="row gendisplay">
+            <p class="dots">.......</p>
+        </div>
+
+
+        <div class="row gendisplay lk-cmnt">
+
+            <div class="likes">
+                {% if post.writer.username == cookie_username: %}
+                    <div>
+                        Liked by {{post.likes}}
+                    </div>
+                {% else: %}
+                    <form id="likeform" method="post" action="/like">
+                        <input type="hidden" name="postid" value={{post.key().id()}}>
+                        {% if post.key().id() in user_liked: %}
+                            <button><i class="fa fa-heart red" aria-hidden="true"></i></button>
+                        {% else: %}
+                            <button class="is-heart-btn"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                        {% endif%}
+                        <span class="like-number green">{{post.likes}}</span>
+                    </form>
+                {% endif %}
+
+            </div>
+            <div class="comments" >
+                <a class="comments green" href="/discussposts/{{post.key().id()}}#disqus_thread">Comments</a>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+</main>
+
+<script>
+    function delFunc() {
+        if (confirm("Do you want to delete this post?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+<script id="dsq-count-scr" src="//ssdisqus.disqus.com/count.js" async></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock %}

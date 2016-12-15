@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block pagenavitems %}
+    <a class="navitems" href="/profile">{{cookie_username}}</a> | <!-- <TO-DO>show profile -->
+    <a class="navitems" href="/signout">Sign out</a> <!--conditional signin/signout/username-->
+{% endblock %}
+
+{% block content %}
+
+<main class="main-content-color">
+
+    <div class="row share">
+        <h1>Edit your post...</h1>
+        <div class="error">
+            <h2>{{error}} </h2>
+        </div>
+    </div>
+
+    <div>
+        <form method="post">
+            <input type="hidden" name="postid" value="{{postid}}">
+            <div class="row newtitle">
+                <small>Edit title</small>
+                <input class="row" type="text" name="subject" value="{{post.title}}" placeholder="Blog Title">
+            </div>
+
+            <div class="row tinycontent">
+                <small>Edit content</small>
+                <textarea rows="15" cols="100" name="content">{{post.content}}</textarea>
+            </div>
+
+            <div class="formelements">
+                <button class = "btn is-green-btn sign-btn" name="subject" type="submit">Update Post</button>
+            </div>
+            <div class="formelements">
+               <a class = "btn is-green-btn" href = "/">Discard Changes</a>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+<script>tinymce.init({
+        selector:'textarea',
+        browser_spellcheck: true,
+        menubar: false,
+        toolbar: 'bold, italic, underline, forecolor, backcolor, undo, redo, ',
+        plugins: "textcolor ",
+        forced_root_block : ""
+        });
+</script>
+
+{% endblock %}

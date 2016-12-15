@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block pagenavitems %}
+{% endblock %}
+
+{% block content %}
+
+        <div class="allpagecontent">
+
+            <div class="formcontainer" >
+
+                <div class="pagetitle">
+                    <h1> Sign in </h1>
+                    <small class="error">{{error}}</small>
+                </div>
+
+                <form method="post" class="blogcontent">
+
+                    <div class="formelements">
+                        <small>Username</small>
+                        <input type = "text" name="username"  value={{input_username}}>
+                        <p class="error">{{username_error}}</p>
+                    </div>
+
+                    <div class="formelements">
+                        <small>Password</small>
+                        <input type = "password" name="password" value={{input_password}}>
+                        <p class="error">{{password_error}}</p>
+                    </div>
+
+                    <!--signin errors-->
+                    <div class="error">
+                        <p class="">{{signin_error}}</p>
+                    </div>
+
+                    <div class="formelements btn-div">
+                        <button class = "btn is-green-btn btn-ext-sign1" name="subject" type="submit">Sign in</button>
+                    </div>
+                </form>
+
+                <div class="formelements signup btn-div">
+                    <a class = "btn is-green-btn btn-ext-sign2" href = "/signup">No account? Sign up now</a>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+

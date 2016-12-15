@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block pagenavitems %}
+    <a class="navitems" href="/profile">{{cookie_username}}</a> | <!-- <TO-DO>show profile -->
+    <a class="navitems" href="/newpost">write a story</a> |
+    <a class="navitems" href="/signout">Sign out</a> <!--conditional signin/signout/username-->
+{% endblock %}
+
+{% block content %}
+
+        <div class="allpagecontent ">
+            <section>
+                <h1>Welcome {{cookie_username}}!
+                <!-- TO-DO What do you want to do? -->
+            </section>
+        </div>
+{% endblock %}

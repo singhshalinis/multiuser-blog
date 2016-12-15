@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block pagenavitems %}
+    <a class="navitems" href="/profile">{{cookie_username}}</a> | <!-- <TO-DO>show profile -->
+    <a class="navitems" href="/signout">Sign out</a> <!--conditional signin/signout/username-->
+{% endblock %}
+
+{% block content %}
+
+<div class="allpagecontent">
+
+    <div class="row share">
+        <h1>Share something, write a blog...</h1>
+    </div>
+
+    <div>
+        <form method="post">
+            <div class="row newtitle">
+                <small>Give it a title</small>
+                <input class="row" type="text" name="subject" value="{{subject}}" placeholder="Blog Title">
+            </div>
+
+            <div class="row tinycontent">
+                <small>Your thoughts go here. Try some formatting. Enjoy!</small>
+                <textarea rows="15" cols="100" name="content">{{content}}</textarea>
+            </div>
+
+            <div class="error">
+                <small>{{error}} </small>
+            </div>
+
+            <div >
+                <input class="submitstyle" type="submit">
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
+<script>tinymce.init({
+        selector:'textarea',
+        browser_spellcheck: true,
+        menubar: false,
+        toolbar: 'bold, italic, underline, forecolor, backcolor, undo, redo, ',
+        plugins: "textcolor ",
+        forced_root_block : ""
+        });
+</script>
+
+{% endblock %}
