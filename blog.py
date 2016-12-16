@@ -549,8 +549,7 @@ def getUser(username):
 
 
 def getUserId(username):
-    if username:
-        return getUser(username).key().id()
+    return getUser(username).key().id()
 
 
 # Utility Functions used on Google app engine datastore
