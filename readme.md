@@ -44,6 +44,25 @@ Below is a brief description of the folders/files that have been used for this a
 7.  readme.md - It's me!
 
 
+How to get started
+-------------------
+1. Go to https://udacity-shal-blog.appspot.com/ 
+
+2. Read all blog posts from various writers.
+
+3. To write a post, signup and use the "Write a story" link.
+
+3. Come back, login and write more posts.
+
+4. Like posts by clicking the "heart" with each post. All posts you have liked would have filled red heart when you are logged in. For guests, trying to like a post would redirect to signin page.
+
+5. Comments are implemented using Disqus. To comment, Disqus wants us to login using an account Disqus, Google, Facebook, etc. 
+
+6. Edit/Delete something you had written.
+
+7. To signout, use the "sign out" link on the home page.
+ 
+
 Functionalities
 ----------------
 1.  Read posts written by different writers all in the same place. All posts can be read without the need to login.
@@ -105,6 +124,12 @@ References, Credits & Acknowledgements
 7.  https://devopscloud.net/2014/11/30/a-real-quick-quick-start-with-google-cloud-platform-command-line-tools/
 
 8.  https://github.com/sixrevisions/semi-transparent-buttons/blob/master/semi-transparent-buttons.css
+
+9.  Validators
+	1.	http://stackoverflow.com/questions/37939131/how-to-validate-jinja-syntax-without-variable-interpolation - Jinja 
+	2.	https://jigsaw.w3.org/css-validator/ - For CSS
+	3.	https://validator.w3.org/ - For Base.html
+	4.	http://pep8online.com/	- For Python
 
 
 Contact Information
