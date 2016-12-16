@@ -18,6 +18,7 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 jinja_env.filters['datetimeformat'] = datetimeformat
 
+# For signup validation
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASSWORD_RE = re.compile(r"^.{3,20}$")
 EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
@@ -129,6 +130,7 @@ class SignupHandler(Handler):
             self.redirect("/welcome")
 
         else:
+        # error
             self.render_front(input_username=input_username,
                               input_password=input_password,
                               input_verify=input_verify,
@@ -262,6 +264,7 @@ class NewpostHandler(Handler):
                               error=error)
 
 
+# Handles "home" page or default "/"
 class BlogFrontHandler(Handler):
     def render_front(self, posts, user_liked="", cookie_username=""):
         self.render("posts.html", posts=posts, user_liked=user_liked,
@@ -307,6 +310,7 @@ class PermalinkHandler(Handler):
             self.redirect("/", error=error)
 
 
+# Handles comments
 class DiscussPostHandler(Handler):
     def render_front(self, post, cookie_username=""):
         self.render("discussposts.html", post=post,
@@ -331,6 +335,8 @@ class DiscussPostHandler(Handler):
 
 
 # has a redirect to signin page
+# Handles user profile
+# TO-DO: This needs more feature
 class ProfileHandler(Handler):
     def render_front(self, cookie_username):
         self.render("profile.html", cookie_username=cookie_username)
@@ -344,6 +350,7 @@ class ProfileHandler(Handler):
             self.redirect("/signin?error=" + str(error))  # TO-DO: Encrypt
 
 
+# Post editing
 class EditHandler(Handler):
     def render_front(self, cookie_username, postid, post, error=""):
         self.render("edit.html", cookie_username=cookie_username, post=post,
@@ -393,6 +400,7 @@ class EditHandler(Handler):
                               postid=input_post_id, error=error)
 
 
+# Post delete handler
 class DeleteHandler(Handler):
     def post(self):
 
@@ -415,6 +423,7 @@ class DeleteHandler(Handler):
             self.redirect("/signup")
 
 
+# user likes handler
 class LikeHandler(Handler):
     def post(self):
         # Check if the user is logged in and then only continue
@@ -460,6 +469,7 @@ class LikeHandler(Handler):
             self.redirect("/")
 
 
+# misc - about page handler
 class AboutUsHandler(Handler):
     def render_front(self, cookie_username=""):
         self.render("about.html")
@@ -468,6 +478,7 @@ class AboutUsHandler(Handler):
         self.render_front()
 
 
+# misc - contact page handler
 class ContactUsHandler(Handler):
     def render_front(self, cookie_username=""):
         self.render("contactus.html")
