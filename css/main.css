@@ -289,8 +289,6 @@ h1, h3, h2, h4, h5, p, img, form{
 small {
     display: block;
     font-size: 0.75em;
-    font-style: none;
-
 }
 
 /* Copied from and then edited
@@ -372,7 +370,7 @@ button {
     color: #333333;
     min-width: 60px;
     text-align: center;
-    background-color: none;
+    background-color: transparent;
     border: 1px solid #3FAD6F;
     border-radius: 15px;
     /*text-align: center;*/
