@@ -24,6 +24,7 @@ from handlers import ProfileHandler
 from handlers import SigninHandler
 from handlers import SignoutHandler
 from handlers import WelcomeHandler
+from handlers import ErrorHandler
 
 
 # all web handlers
@@ -35,9 +36,11 @@ app = webapp2.WSGIApplication([(r"/newpost", NewpostHandler),
                               (r"/signin", SigninHandler),
                               (r"/signout", SignoutHandler),
                               (r"/profile", ProfileHandler),
-                              (r"/edit", EditHandler),
+                              (r"/edit/(\d+)", EditHandler),
                               (r"/delete", DeleteHandler),
                               (r"/like", LikeHandler),
                               (r"/discussposts/(\d+)", DiscussPostHandler),
                               (r"/about", AboutUsHandler),
+                              #  (r"/error/([0-9]+)", ErrorHandler), #TBD
+                              (r"/error", ErrorHandler),
                               (r"/contact", ContactUsHandler), ], debug=True)
