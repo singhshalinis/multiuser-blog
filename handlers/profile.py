@@ -6,7 +6,11 @@ class ProfileHandler(Handler):
         self.render("profile.html", cookie_username=cookie_username)
 
     def get(self):
-        cookie_username = self.checkLoggedInUser()
+        cookie_username = ""
+        user = self.get_curr_user()
+        if user:
+            cookie_username = user.username
+
         if cookie_username:
             self.render_front(cookie_username=cookie_username)
         else:

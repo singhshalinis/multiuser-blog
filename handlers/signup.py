@@ -1,12 +1,10 @@
 import re
-import hashlib
-import random
 
-from string import letters
 from google.appengine.ext import db
 from handler import Handler
 from models import BlogUser
 
+import utilities
 
 # For signup validation
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
@@ -30,28 +28,33 @@ class SignupHandler(Handler):
                     userexists_error=userexists_error)
 
     def get(self):
-        cookie_username = self.checkLoggedInUser()
-        if cookie_username:
-            self.redirect('/')  # redirect to home if already logged in
+        # if user is already logged in - redirect to home page
+        user = self.get_curr_user()
+        if user:
+            self.redirect('/')
         else:
             self.render_front()
 
     def post(self):
+        error = False
+        username_error = password_error = verify_error = ""
+        email_error = userexists_error = ""
+
+        # get parameters
         input_username = self.request.get("username")
         input_password = self.request.get("password")
         input_verify = self.request.get("verify")
         input_email = self.request.get("email")
 
-        error = False
-        username_error = password_error = verify_error = ""
-        email_error = userexists_error = ""
-
-        # user validation
-        if not (valid_username(input_username)):
+        # username validation
+        if not input_username:
+            username_error = "No username provided"
+            error = True
+        elif not (valid_username(input_username)):
             username_error = "Invalid Username"
             error = True
-        elif userExists(input_username) == 1:  # there is one row for this user
-            userexists_error = "username already exists"
+        elif userExists(input_username) == 1:  # there is 1 row for this user
+            userexists_error = "Username already exists"
             error = True
 
         # password validation
@@ -74,7 +77,7 @@ class SignupHandler(Handler):
                 error = True
 
         if not error:
-            secure_password = make_pw_hash(input_username, input_password)
+            secure_password = utilities.make_pw_hash(input_username, input_password)
             current_user = BlogUser(username=input_username,
                                     password=secure_password,
                                     email=input_email)
@@ -119,15 +122,7 @@ def valid_password(password):
 def valid_email(email):
     return EMAIL_RE.match(email)
 
+
 def userExists(username):
     q = db.GqlQuery("select * from BlogUser where username = :1", username)
     return q.count()
-
-def make_pw_hash(name, pw, salt=None):
-    if not salt:
-        salt = make_salt()
-    h = hashlib.sha256(name + pw + salt).hexdigest()
-    return '%s,%s' % (salt, h)
-
-def make_salt(length=5):
-    return ''.join(random.choice(letters) for x in xrange(length))

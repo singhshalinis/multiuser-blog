@@ -43,12 +43,11 @@
             {% if cookie_username == post.writer.username %}
             <div class="edit-del">
 
-                <a class="edit btn is-green-btn btn-ext" href="/edit?postid={{post.key().id()}}">Edit</a>
+                <a class="edit btn is-green-btn btn-ext" href="/edit/{{post.key().id()}}">Edit</a>
 
                 <div class="delete btn is-green-btn btn-ext">
                     <form id="delform" method="post" action="/delete">
                         <input type="hidden" name="postid" value={{post.key().id()}}>
-                        <input type="hidden" name="postkey" value="{{post.key()}}">
                         <button class="" onclick="return delFunc()">Delete</button>
                     </form>
                 </div>

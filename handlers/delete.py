@@ -1,18 +1,24 @@
 from handler import Handler
 from models import Post
 
-class DeleteHandler(Handler):
-    def post(self):
+import decorator
 
-        # Check if the user is logged in and then only continue
-        username = self.checkLoggedInUser()
-        if not username:
+class DeleteHandler(Handler):
+
+
+    @decorator.deco_user_owns_post
+    def post(self):
+        cookie_username = ""
+        user = self.get_curr_user()
+        if user:
+            cookie_username = user.username
+        else:
             error = "You are not signed in. Sign in to continue."
             self.redirect("/signin?error=" + str(error))  # TO-DO: Encrypt
 
         # Get parameters
-        postkey = self.request.get("postkey")
-        input_post = Post.get(postkey)
+        postid = self.request.get("postid")
+        input_post = Post.get_by_id(int(postid))
 
         # delete
         if input_post:

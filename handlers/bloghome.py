@@ -11,13 +11,16 @@ class BlogFrontHandler(Handler):
                     cookie_username=cookie_username)
 
     def get(self):
-        cookie_username = self.checkLoggedInUser()
-        posts = getPostsfromDataStore()
-
+        # cookie_username = self.checkLoggedInUser()
+        cookie_username = ""
         user_liked = set()
-        if cookie_username:
-            userid = getUserId(cookie_username)
-            user_likes = getUserLikes(userid)  # only those that user likes
+
+        posts = getPostsfromDataStore()
+        user = self.get_curr_user()
+
+        if user:
+            cookie_username = user.username
+            user_likes = getUserLikes(user.key().id())  # only those that user likes
 
             for ul in user_likes:
                 user_liked.add(ul.postid)  # postid set for use on front end
@@ -34,6 +37,7 @@ def getPostsfromDataStore(post_id=""):
         # b.content.replace('\n', '<br>')     # convert when displaying
         posts.append(b)
     return posts
+
 
 def getUser(username):
     return BlogUser.gql("where username = :1", username).get()

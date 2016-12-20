@@ -5,19 +5,22 @@ from models import BlogUser
 from models import Post
 from models import Likes
 
+import decorator
+
 class LikeHandler(Handler):
+
+    @decorator.deco_user_not_owns_post
     def post(self):
-        # Check if the user is logged in and then only continue
-        username = self.checkLoggedInUser()
-        if not username:
+        cookie_username = ""
+        user = self.get_curr_user()
+        if not user:
             error = "You are not signed in. Sign in to continue."
             self.redirect("/signin?error=" + str(error))  # TO-DO: Encrypt
-
         else:
-            # Get parameters
-            userid = getUserId(username)
+            cookie_username = user.username
             postid = self.request.get("postid")
             post = Post.get_by_id(int(postid))
+            userid = user.key().id()
 
             if getUserPostLikes(int(userid), int(postid)) == 1:
                 # liked by user earlier ("getUserPostLikes" count should be 1)
@@ -32,7 +35,6 @@ class LikeHandler(Handler):
                 if post.likes:
                     post.likes = post.likes - 1
                     post.put()
-                # self.response.write("hello-old")
 
             else:  # not yet liked by user("getUserPostLikes" count 0)
 
@@ -46,17 +48,7 @@ class LikeHandler(Handler):
                 else:
                     post.likes = 1
                     post.put()
-                # self.response.write("hello-new")
             self.redirect("/")
-
-
-def getUser(username):
-    return BlogUser.gql("where username = :1", username).get()
-
-
-def getUserId(username):
-    if username:
-        return getUser(username).key().id()
 
 def getUserPostLikes(userid, postid):
     q = db.GqlQuery("select * from Likes where userid = :1 and postid = :2",

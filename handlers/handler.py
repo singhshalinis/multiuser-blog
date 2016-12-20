@@ -4,8 +4,7 @@ import os
 import hashlib
 from datetime import datetime
 
-
-
+from models import BlogUser
 
 # Need it here before jinja env is set
 def datetimeformat(value, format='%d/%m/%Y'):
@@ -16,9 +15,14 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 jinja_env.filters['datetimeformat'] = datetimeformat
 
+# # error_messages (should ideally go in datastore)
+# error_msg{1} = "Invalid Request"
+# error_msg{2} = "Log in to continue"
+
 
 # parent handler for all rendering
 class Handler(webapp2.RequestHandler):
+
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
@@ -29,25 +33,45 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **params):
         self.write(self.render_str(template, **params))
 
-    def setUsernameCookie(self, name):
-        secure_pwd = make_secure_val(name)
+    def set_secure_cookie(self, name, val):
+        cookie_val = make_secure_val(val)
         self.response.headers.add_header(
                      'Set-Cookie',
-                     'username=%s; Path=/' % (str(name)))
+                     '%s=%s; Path=/' % (name, str(cookie_val)))
 
-    def removeUsernameCookie(self):
-        self.response.headers.add_header('Set-Cookie', 'username=; Path=/')
+    def read_secure_cookie(self, name):
+        cookie_val = self.request.cookies.get(name)
+        return cookie_val and check_secure_val(cookie_val)
 
-    def checkLoggedInUser(self):
-        cookie_username = ""
-        usrnm = self.request.cookies.get('username')
-        if usrnm:
-            cookie_username = usrnm.split('|')[0]
-        return cookie_username
+    def get_curr_user(self):
+        return self.user
 
-def make_secure_val(s):
-    return s + '|' + hash_str(s)
+    def login(self, user):
+        self.set_secure_cookie('userid', str(user.key().id()))
+
+    def logout(self):
+        self.response.headers.add_header('Set-Cookie', 'userid=; Path=/')
+
+    def initialize(self, *a, **kw):
+        webapp2.RequestHandler.initialize(self, *a, **kw)
+        uid = self.read_secure_cookie('userid')
+        self.user = uid and BlogUser.by_id(int(uid))
+
+    def error_page(self, error_code=""):
+        """handle error pages"""
+        self.redirect("/error/" + str(error_code))
+
+    def error_page(self):
+        """handle error pages"""
+        self.redirect("/error")
 
 def hash_str(s):
     return hashlib.md5(s).hexdigest()
 
+def make_secure_val(s):
+    return s + '|' + hash_str(s)
+
+def check_secure_val(h):
+    str = h.split('|')[0]
+    if h == make_secure_val(str):
+        return str

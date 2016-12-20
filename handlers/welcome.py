@@ -5,9 +5,9 @@ class WelcomeHandler(Handler):
         self.render("welcome.html", cookie_username=cookie_username)
 
     def get(self):
-        cookie_username = self.checkLoggedInUser()
-        if cookie_username:
-            self.render_front(cookie_username=cookie_username)
+        user = self.get_curr_user()
+        if user:
+            self.render_front(cookie_username=user.username)
         else:
             error = "You are not signed in. Sign in to continue."
             self.redirect("/signin?error=" + str(error))  # TO-DO: Encrypt
