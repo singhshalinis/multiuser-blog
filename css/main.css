@@ -1,5 +1,36 @@
-/* CSS classes are mostly in order of their use in html */
+/******************** Media Queries ********************/
+@media screen and (min-width: 550px) {
+    body {
+        font-size: 14px;
+    }
+}
 
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    .proj {
+        width: 30%;
+    }
+
+    .navlinks {
+        padding-top: 3%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .container {
+        margin-right: auto;
+        margin-left: auto;
+        width: 900px;
+    }
+
+    body {
+        font-size: 18px;
+    }
+}
+
+/******************** page level styling ********************/
 @font-face {
     font-family: 'open_sanscondensed_light';
     src: url('../fonts/OpenSans-CondLight-webfont.eot');
@@ -25,6 +56,71 @@ body {
     transition: font-size .2s ease-in;
 }
 
+header {
+    padding: 2%;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    color: #7f7f7f; /* dark grey 808080*/
+    background-color: #7f7f7f; /* dark grey */
+    margin-bottom: 20px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    padding: 1em;
+    text-align: center;
+    background-color: #58595B; /*#f44336;*/
+    font-size: 1em;
+    color: #c1c1c1;
+}
+
+h1, h3, h2, h4, h5, p, img, form{
+    margin:0;
+    padding: 0;
+    font-weight: normal;
+}
+
+main {
+    width: 100%;
+}
+
+button {
+    background-color: transparent;
+    border:none;
+    font-family: inherit;
+    font-size: inherit;
+    text-transform: uppercase;
+}
+
+small {
+    display: block;
+    font-size: 0.75em;
+}
+
+/* Copied from and then edited
+http://callmenick.com/post/various-css-input-text-styles
+*/
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 3px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+nav a, nav a:visited, nav a:hover, nav a:active {
+    color: #f6f6f6;
+}
+
+a:link {
+    text-decoration: none;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -34,6 +130,56 @@ body {
     width: 100%;
 }
 
+.header-color {
+    background-color: #58595B; /*#dark grey */
+}
+
+.main-content-color{
+    background-color: #f6f6f6; /*off white*/
+}
+
+.error {
+    color: red;
+    font-size: 0.6em;
+    padding-left: 10px;
+}
+
+/********************other containers and their styles********************/
+.postshadoweffect {
+    box-shadow: 0px 0px 2px #888888;
+}
+
+.allpagecontent {
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.subcontainer {
+    width: 96%;
+    padding:2%;
+    margin: 0;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #FFFFFF; /*white*/
+}
+
+.signupcontainer {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.formcontainer {
+    border: 3px solid #f1f1f1;
+    border-radius: 4px;
+}
+
+.gendisplay {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/******************** Colors ********************/
 .offwhite {
     color: #f6f6f6;
 }
@@ -54,16 +200,7 @@ body {
     color:yellow;
 }
 
-/* nav anchor Links */
-nav a, nav a:visited, nav a:hover, nav a:active {
-    color: #f6f6f6;
-}
-
-a:link {
-    text-decoration: none;
-}
-
-
+/******************** Button/Links/Forms styling ********************/
 .navlinks {
     padding-top: 2%;
 }
@@ -75,294 +212,12 @@ a:link {
     color: #f6f6f6;
 }
 
-.hello {
-    text-align: right;
-    margin-top: 1em;
-    text-transform: capitalize;
-}
-
-.helloname {
-    text-transform: lowercase;
-}
-
-header {
-    padding: 2%;
-}
-
-
-
-.header-color {
-    background-color: #58595B; /*#dark grey */
-}
-
-hr {
-    border: none;
-    height: 2px;
-    color: #7f7f7f; /* dark grey 808080*/
-    background-color: #7f7f7f; /* dark grey */
-    margin-bottom: 20px;
-}
-
-
-footer {
-    position: relative;
-    bottom: 0;
-    padding: 1em;
-    text-align: center;
-    background-color: #58595B; /*#f44336;*/
-    font-size: 1em;
-    color: #c1c1c1;
-}
-
-.dots {
-    align-items: center;
-    text-align: center;
-}
-
-.title-logo {
-    width: 40%;
-}
-
-.title-desc {
-    width: 60%;
-    margin: 0;
-    text-align: right;
-    text-transform: uppercase;
-    color: #c1c1c1;
-}
-
-.logo-image {
-    width: 70%;
-    max-width: 100px;
-    transition: width .2s ease-in;
-}
-
-.title-name {
-    font-size: 2.5em;
-    margin: 0;
-}
-
-.title-role {
-    margin: 0;
-    font-size: 1.12em;
-}
-
-
-
-.hero {
-    max-width: 100vw;
-    width: 100%;
-}
-
-.featured-line {
-    display: inline-block;
-    margin: auto;
-}
-
-.featured {
-    margin-top: 30px;
-    color: #f44336; /*red */
-    font-size: 2.25em;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-
-
-.hrsize {
-    width: 50%;
-}
-
-.hralign {
-   text-align: center;
-}
-
-.proj-details {
-    color: #333333;
-    font-size: 1.12em;
-    margin: 0;
-    padding: 5px;
-    text-align: left;
-}
-
-.project-link {
-    color: #333333;
-    font-size: 0.68em;
-    text-align: left;
-}
-
-.article-margin {
-    margin-bottom: 40px;
-}
-
-.proj {
-    width: 64%;
-    margin: 20px auto;
-    padding: 5px;
-    padding-bottom: 20px;
-    background-color: #f6f6f6;
-}
-
-.proj-image {
-    width: 100%;
-}
-
-
-.footernavitems {
-    padding-top: 5px;
-    font-size: 0.8em;
-    margin: 0;
-    text-transform: lowercase;
-}
-
-h1, h3, h2, h4, h5, p, img, form{
-    margin:0;
-    padding: 0;
-    font-weight: normal;
-}
-
-/* styles for about.html and contactUs.html pages */
-.about {
-    color: #333333;
-    font-size: 1em;
-    text-align: center;
-    padding: 10px 0;
-}
-
-.aboutSize {
-    height: 150px;
-}
-
-.text-italic {
-    font-style: italic;
-}
-
-
-
-
-.hrsize2 {
-    width: 100%;
-    margin-bottom: 10px;
-    margin-top: 0;
-}
-
-.blogcontent {
-    font-size: 1.12em;
-    padding: 0 10px;
-}
-
-.signupcontainer {
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.signup {
-    font-size: 0.9em;
-}
-/* New Post */
-.newblogposts {
-    margin-top: 30px;
-    padding: 10px;
-    margin: 0 auto;
-}
-
-.share {
-    font-size: 1em;
-    margin-bottom: 20px;
-}
-
-.newtitle {
-    padding-bottom: 25px;
-}
-
-.tinycontent {
-    padding-bottom: 15px;
-}
-
-.error {
-    color: red;
-    font-size: 0.6em;
-    padding-left: 10px;
-}
-
-small {
-    display: block;
-    font-size: 0.75em;
-}
-
-/* Copied from and then edited
-http://callmenick.com/post/various-css-input-text-styles
-*/
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 8px 10px;
-    margin: 3px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-
-.sign-btn {
-    padding: 0.5em 0;
-}
-
-.allpagecontent {
-    padding: 10px;
-    margin: 0 auto;
-}
-
-.pagetitle {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.formcontainer {
-    border: 3px solid #f1f1f1;
-    border-radius: 4px;
-}
-
 .formelements {
     padding-bottom: 20px;
 }
 
 .btn-div {
     text-align: center;
-}
-/* Updated */
-
-/* */
-
-
-.main-content-color{
-    background-color: #f6f6f6; /*off white*/
-}
-
-main {
-    width: 100%;
-}
-
-.subcontainer {
-    width: 96%;
-    padding:2%;
-    margin: 0;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    background-color: #FFFFFF; /*white*/
-}
-
-
-.postshadoweffect {
-    box-shadow: 0px 0px 2px #888888;
-}
-
-button {
-    background-color: transparent;
-    border:none;
-    font-family: inherit;
-    font-size: inherit;
-    text-transform: uppercase;
 }
 
 .btn{
@@ -404,7 +259,6 @@ button {
 div.is-green-btn:hover button,
 div.is-green-btn:focus button{
   color: #fff;
-
 }
 
 .is-heart-btn:hover,
@@ -413,18 +267,96 @@ div.is-green-btn:focus button{
   cursor:pointer;
 }
 
-
-/*.is-a-btn:hover,
-.is-a-btn:focus {
-  color: #fff;
-  background: rgba(63, 173, 111, 1);
-}*/
-
-.gendisplay {
-    display: flex;
-    flex-wrap: wrap;
+/******************** HR line ********************/
+.hrsize {
+    width: 50%;
 }
 
+.hralign {
+   text-align: center;
+}
+
+.hrsize2 {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+/******************** Footer********************/
+.footernavitems {
+    padding-top: 5px;
+    font-size: 0.8em;
+    margin: 0;
+    text-transform: lowercase;
+}
+
+/******************** Header ********************/
+.hello {
+    text-align: right;
+    margin-top: 1em;
+    text-transform: capitalize;
+}
+
+.helloname {
+    text-transform: lowercase;
+}
+
+.title-logo {
+    width: 40%;
+}
+
+.title-desc {
+    width: 60%;
+    margin: 0;
+    text-align: right;
+    text-transform: uppercase;
+    color: #c1c1c1;
+}
+
+.logo-image {
+    width: 70%;
+    max-width: 100px;
+    transition: width .2s ease-in;
+}
+
+.title-name {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.title-role {
+    margin: 0;
+    font-size: 1.12em;
+}
+
+/******************** New Post ********************/
+.newblogposts {
+    margin-top: 30px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.newtitle {
+    padding-bottom: 25px;
+}
+
+.tinycontent {
+    padding-bottom: 15px;
+}
+
+/******************** Signin, signup, signout ********************/
+.signup {
+    font-size: 0.9em;
+}
+.sign-btn {
+    padding: 0.5em 0;
+}
+
+/******************** Post Home Page ********************/
+.pagetitle {
+    margin-bottom: 30px;
+    text-align: center;
+}
 .user-circle {
     width: 1.5em;
     height: 1.5em;
@@ -464,8 +396,6 @@ div.is-green-btn:focus button{
     width: 10%;
 }
 
-
-
 .blogheader {
     margin: 0;
     /*padding: 10px;*/
@@ -477,30 +407,27 @@ div.is-green-btn:focus button{
     align-items: flex-end;
 }
 
-.blogtitle {
-    width: 70%;
+.blogcontent {
+    font-size: 1.12em;
+    padding: 0 10px;
 }
 
-.blogdate {
-    width: 30%;
-    font-size: .5em;
-    text-align: right;
+.dots {
+    align-items: center;
+    text-align: center;
 }
 
-
-.lk-cmnt {
-   padding-top: 1.5em;
-   font-size: 0.8em;
-   width: 100%;
+.noposts {
+    text-align: center;
+    padding: 25px;
 }
 
-.likes {
-    width: 50%;
-    text-align: left;
-    color: #5BA8DA; /*blue*/
+/******************** Comments and Likes ********************/
+.share {
+    font-size: 1em;
+    margin-bottom: 20px;
 }
 
-/*Comments*/
 .comments {
     width: 50%;
     text-align: right;
@@ -516,16 +443,42 @@ div.is-green-btn:focus button{
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
 .disqus-styles {
     padding: 10px;
 }
 
-.noposts {
-    text-align: center;
-    padding: 25px;
+.lk-cmnt {
+   padding-top: 1.5em;
+   font-size: 0.8em;
+   width: 100%;
+}
+
+.likes {
+    width: 50%;
+    text-align: left;
+    color: #5BA8DA; /*blue*/
 }
 
 .like-number {
     font-weight: bold;
+}
+
+/******************** about & contact pages ********************/
+.about {
+    color: #333333;
+    font-size: 1em;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.aboutSize {
+    height: 150px;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.article-margin {
+    margin-bottom: 40px;
 }
