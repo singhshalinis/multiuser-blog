@@ -35,7 +35,7 @@
             {% if cookie_username == post.writer.username %}
             <div class="edit-del">
 
-                <a class="edit btn is-green-btn btn-ext" href="/edit?postid={{post.key().id()}}">Edit</a>
+                <a class="edit btn is-green-btn btn-ext" href="/edit/postid={{post.key().id()}}">Edit</a>
 
                 <div class="delete btn is-green-btn btn-ext">
                     <form id="delform" method="post" action="/delete">
