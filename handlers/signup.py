@@ -84,12 +84,7 @@ class SignupHandler(Handler):
             current_user.put()      # save new user
 
             # login after signup
-            self.setUsernameCookie(input_username)
-            # self.response.headers.add_header('Set-Cookie',
-            #                              str('username='
-            #                              + make_secure_val(input_username)
-            #                              + '; Path=/'))  # write cookie
-            # redirect to Welcome page
+            self.login(current_user)
             self.redirect("/welcome")
 
         else:

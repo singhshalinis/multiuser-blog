@@ -65,8 +65,9 @@ class SigninHandler(Handler):
 # validate username - password
 def valid_signin(username, password):
     u = BlogUser.gql("where username = :1", username).get()
-    if valid_pw(username, password, u.password):
-        return u
+    if u:
+        if valid_pw(username, password, u.password):
+            return u
 
 def valid_pw(name, password, h):
     salt = h.split(',')[0]
