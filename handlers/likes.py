@@ -7,9 +7,11 @@ from models import Likes
 
 import decorator
 
+
 class LikeHandler(Handler):
 
-    @decorator.deco_user_not_owns_post
+    @decorator.deco_user_signed_in
+    @decorator.deco_user_not_owns_post_exists
     def post(self):
         cookie_username = ""
         user = self.get_curr_user()
@@ -49,6 +51,7 @@ class LikeHandler(Handler):
                     post.likes = 1
                     post.put()
             self.redirect("/")
+
 
 def getUserPostLikes(userid, postid):
     q = db.GqlQuery("select * from Likes where userid = :1 and postid = :2",

@@ -3,10 +3,11 @@ from models import Post
 
 import decorator
 
+
 class DeleteHandler(Handler):
 
-
-    @decorator.deco_user_owns_post
+    @decorator.deco_user_signed_in
+    @decorator.deco_user_owns_and_post_exists_del
     def post(self):
         cookie_username = ""
         user = self.get_curr_user()

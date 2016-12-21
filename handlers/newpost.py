@@ -2,12 +2,16 @@ from handler import Handler
 from models import BlogUser
 from models import Post
 
+import decorator
+
+
 class NewpostHandler(Handler):
     def render_front(self, cookie_username, input_subject="", input_content="",
                      error=""):
         self.render("newpost.html", cookie_username=cookie_username,
                     subject=input_subject, content=input_content, error=error)
 
+    @decorator.deco_user_signed_in
     def get(self):
         cookie_username = ""
         user = self.get_curr_user()
@@ -18,6 +22,7 @@ class NewpostHandler(Handler):
             error = "You are not signed in. Sign in to continue."
             self.redirect("/signin?error=" + str(error))  # TO-DO: Encrypt
 
+    @decorator.deco_user_signed_in
     def post(self):
         # Check if the user is logged in and then only continue
         cookie_username = ""
@@ -42,7 +47,7 @@ class NewpostHandler(Handler):
 
         else:
             error = "Enter both, post title and post content."
-            self.render_front(cookie_username=username,
+            self.render_front(cookie_username=cookie_username,
                               input_subject=input_subject,
                               input_content=input_content,
                               error=error)

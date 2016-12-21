@@ -6,11 +6,13 @@ from models import Post
 
 import decorator
 
+
 class EditHandler(Handler):
     def render_front(self, cookie_username, postid, post, error=""):
         self.render("edit.html", cookie_username=cookie_username, post=post,
                     error=error)
 
+    @decorator.deco_user_signed_in
     @decorator.deco_user_owns_and_post_exists
     def get(self, postid):
         cookie_username = ""
@@ -30,7 +32,7 @@ class EditHandler(Handler):
                 self.render_front(cookie_username=cookie_username, post=post,
                                   postid=postid, error="")
 
-
+    @decorator.deco_user_signed_in
     @decorator.deco_user_owns_and_post_exists
     def post(self, postid):
         cookie_username = ""
@@ -40,7 +42,7 @@ class EditHandler(Handler):
 
         if not postid:
             self.response.write("ERROR")
-        else :
+        else:
             if not user:
                 error = "You are not signed in. Sign in to continue."
                 self.redirect("/signin?error=" + str(error))  # TO-DO: Encrypt
@@ -54,7 +56,8 @@ class EditHandler(Handler):
                 # Check for edits
                 if input_post.title == input_title and input_post.content == input_content:
                     error = "Nothing to update"
-                    self.render_front(cookie_username=cookie_username, post=input_post,
+                    self.render_front(cookie_username=cookie_username,
+                                      post=input_post,
                                       postid=input_post_id, error=error)
                 elif input_title and input_content:
                     input_post.title = input_title
@@ -64,5 +67,6 @@ class EditHandler(Handler):
                     self.redirect("/post/" + str(post_id))
                 else:
                     error = "Enter both, post title and post content."
-                    self.render_front(cookie_username=cookie_username, post=input_post,
+                    self.render_front(cookie_username=cookie_username,
+                                      post=input_post,
                                       postid=input_post_id, error=error)
