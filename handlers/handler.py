@@ -6,6 +6,7 @@ from datetime import datetime
 
 from models import BlogUser
 
+
 # Need it here before jinja env is set
 def datetimeformat(value, format='%d/%m/%Y'):
     return value.strftime(format)
@@ -57,19 +58,19 @@ class Handler(webapp2.RequestHandler):
         uid = self.read_secure_cookie('userid')
         self.user = uid and BlogUser.by_id(int(uid))
 
-    def error_page(self, error_code=""):
+    def error_page(self, error_msg=""):
         """handle error pages"""
-        self.redirect("/error/" + str(error_code))
+        self.redirect("/error/?error_msg=" + error_msg)
 
-    def error_page(self):
-        """handle error pages"""
-        self.redirect("/error")
+
 
 def hash_str(s):
     return hashlib.md5(s).hexdigest()
 
+
 def make_secure_val(s):
     return s + '|' + hash_str(s)
+
 
 def check_secure_val(h):
     str = h.split('|')[0]
