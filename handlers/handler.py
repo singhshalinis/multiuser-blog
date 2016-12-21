@@ -63,7 +63,6 @@ class Handler(webapp2.RequestHandler):
         self.redirect("/error/?error_msg=" + error_msg)
 
 
-
 def hash_str(s):
     return hashlib.md5(s).hexdigest()
 
