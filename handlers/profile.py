@@ -1,5 +1,6 @@
 from handler import Handler
 
+
 # TO-DO: This needs more feature
 class ProfileHandler(Handler):
     def render_front(self, cookie_username):

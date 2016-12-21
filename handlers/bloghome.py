@@ -20,7 +20,7 @@ class BlogFrontHandler(Handler):
 
         if user:
             cookie_username = user.username
-            user_likes = getUserLikes(user.key().id())  # only those that user likes
+            user_likes = getUserLikes(user.key().id())  # only which user liked
 
             for ul in user_likes:
                 user_liked.add(ul.postid)  # postid set for use on front end
@@ -46,6 +46,7 @@ def getUser(username):
 def getUserId(username):
     if username:
         return getUser(username).key().id()
+
 
 def getUserLikes(userid):
     return Likes.gql("where userid = :1", userid)

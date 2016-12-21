@@ -1,6 +1,7 @@
 from google.appengine.ext import db
 from BlogUser import BlogUser
 
+
 class Post(db.Model):
     writer = db.ReferenceProperty(BlogUser)
     title = db.StringProperty(required=True)  # note the diff: title & subject

@@ -41,6 +41,5 @@ app = webapp2.WSGIApplication([(r"/newpost", NewpostHandler),
                               (r"/like", LikeHandler),
                               (r"/discussposts/(\d+)", DiscussPostHandler),
                               (r"/about", AboutUsHandler),
-                              #  (r"/error/([0-9]+)", ErrorHandler), #TBD
-                              (r"/error", ErrorHandler),
+                              (r"/error/", ErrorHandler),
                               (r"/contact", ContactUsHandler), ], debug=True)

@@ -3,6 +3,7 @@ from models import Post
 
 import decorator
 
+
 class PermalinkHandler(Handler):
     def render_front(self, posts, cookie_username=""):
         self.render("posts.html", posts=posts, cookie_username=cookie_username)

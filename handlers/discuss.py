@@ -3,6 +3,7 @@ from models import Post
 from error import Error_Codes
 import decorator
 
+
 class DiscussPostHandler(Handler):
     def render_front(self, post, cookie_username=""):
         self.render("discussposts.html", post=post,

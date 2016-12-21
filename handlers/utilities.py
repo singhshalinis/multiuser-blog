@@ -3,6 +3,7 @@ import random
 
 from string import letters
 
+
 # got from hw4
 def make_pw_hash(name, pw, salt=None):
     if not salt:
