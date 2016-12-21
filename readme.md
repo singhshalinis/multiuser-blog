@@ -3,7 +3,7 @@ Multiuser Blog
 
 What is it? (Functionality)
 ---------------------------
-It is a blogging site where multiple users can signup and write posts. Guests can read unlimited posts without signup. To write, like or comment on a post, guests would need to signup/signin. Commenting on posts is powered by Disqus. All sensitive user data is securely stored in Google Datastore. 
+It is a blogging site where multiple users can signup and write posts. Guests can read unlimited posts without signup. To write, like or comment on a post, guests would need to signup/signin. Commenting on posts is powered by Disqus. All sensitive user data is securely stored in Google Datastore.
 The website is designed to render on all device sizes.
 
 
@@ -15,7 +15,7 @@ December 15, 2016
 System-specific Notes
 ----------------------
 *   The app is built using Google App Engine.
-*   Backend is developed in Python 2.7 and uses Jinja 2 for templating. 
+*   Backend is developed in Python 2.7 and uses Jinja 2 for templating.
 *   Google Cloud Datastore is used to persist data.
 *   External Dependencies - Tinymce, Disqus, Font-Awesome
 
@@ -26,12 +26,12 @@ The website is tested for Edge and Chrome Browsers.
 Though it has been designed to render on all device sizes, thourough testing on mobile devices is yet to be done.
 
 
-Package Details (Files involved) 
+Package Details (Files involved)
 --------------------------------
 Below is a brief description of the folders/files that have been used for this application.
 1.  css - main.css contains all styling for the website. responsive.css contains media queries which has been created for organizing the styles but can be completely merged into main.css.
 
-2.  fonts - The website uses "OpenSans-CondLight" and so all font related files are here. 
+2.  fonts - The website uses "OpenSans-CondLight" and so all font related files are here.
 
 3.  images - Contains all images used by the website.
 
@@ -39,14 +39,14 @@ Below is a brief description of the folders/files that have been used for this a
 
 5.  app.yaml - Contains app configuration for deployment on Google App Engine.
 
-6.  blog.py - The monolithic python file which contains all logic and powers the website. 
+6.  blog.py - The monolithic python file which contains all logic and powers the website.
 
 7.  readme.md - It's me!
 
 
 How to get started
 -------------------
-1. Go to https://udacity-shal-blog.appspot.com/ 
+1. Go to https://udacity-shal-blog.appspot.com/
 
 2. Read all blog posts from various writers.
 
@@ -56,33 +56,33 @@ How to get started
 
 4. Like posts by clicking the "heart" with each post. All posts you have liked would have filled red heart when you are logged in. For guests, trying to like a post would redirect to signin page.
 
-5. Comments are implemented using Disqus. To comment, Disqus wants us to login using an account Disqus, Google, Facebook, etc. 
+5. Comments are implemented using Disqus. To comment, Disqus wants us to login using an account Disqus, Google, Facebook, etc.
 
 6. Edit/Delete something you had written.
 
 7. To signout, use the "sign out" link on the home page.
- 
+
 
 Functionalities
 ----------------
 1.  Read posts written by different writers all in the same place. All posts can be read without the need to login.
-	
+
 2.  Signup for new users
-	Users can signup by providing a username, password and email (optional). The username and password can be 3-20 characters long.  
+	Users can signup by providing a username, password and email (optional). The username and password can be 3-20 characters long.
 
 3.  Signin
-	Users can come back to the application anytime later and login and continue. 
+	Users can come back to the application anytime later and login and continue.
 
 4.  Write a post
-	Logged in users will have an option to write posts. 
+	Logged in users will have an option to write posts.
 
 5.  Edit/Delete a post
-	Logged in users can edit and delete posts written by them. 
- 
+	Logged in users can edit and delete posts written by them.
+
 6.  Like and Comment on a post
 	Logged in users can like or comment on a post. Users would not be able to like their own post. Commenting is powered by Disqus which requires the commenter to login to Disqus.
 
-	
+
 Known Issues(major/minor/impacting feature)
 -------------
 1.  On closing the browser, the user is not signed out (noticed mostly while testing on local machine). (major)
@@ -109,7 +109,7 @@ Features under planning
 
 References, Credits & Acknowledgements
 ---------------------------------------
-1.  Password Hashing: The functions are used from HW4 of Udacity's Intro to Backend course.  
+1.  Password Hashing: The functions are used from HW4 of Udacity's Intro to Backend course.
 
 2.  https://disqus.com/ - For comments
 
@@ -126,10 +126,15 @@ References, Credits & Acknowledgements
 8.  https://github.com/sixrevisions/semi-transparent-buttons/blob/master/semi-transparent-buttons.css
 
 9.  Validators
-	1.	http://stackoverflow.com/questions/37939131/how-to-validate-jinja-syntax-without-variable-interpolation - Jinja 
+	1.	http://stackoverflow.com/questions/37939131/how-to-validate-jinja-syntax-without-variable-interpolation - Jinja
 	2.	https://jigsaw.w3.org/css-validator/ - For CSS
 	3.	https://validator.w3.org/ - For Base.html
 	4.	http://pep8online.com/	- For Python
+
+10.	Decorators
+	1.	https://realpython.com/blog/python/primer-on-python-decorators/
+	2.	http://thecodeship.com/patterns/guide-to-python-function-decorators/
+	3.	http://www.artima.com/weblogs/viewpost.jsp?thread=240808
 
 
 Contact Information
