@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-
 {% block pagenavitems %}
     {% if not cookie_username: %}
         <a class="navitems" href="/signin">Sign in </a> |
@@ -81,7 +80,8 @@
         <div class="row gendisplay lk-cmnt">
 
             <div class="likes">
-                {% if post.writer.username == cookie_username: %}
+                {% if post.writer.username == cookie_username or not cookie_username: %}
+                <!-- no option to like for current user's post and guests -->
                     <div>
                         Liked by {{post.likes}}
                     </div>
@@ -89,7 +89,7 @@
                     <form id="likeform" method="post" action="/like">
                         <input type="hidden" name="postid" value={{post.key().id()}}>
                         {% if post.key().id() in user_liked: %}
-                            <button><i class="fa fa-heart red" aria-hidden="true"></i></button>
+                            <button class="is-heart-btn"><i class="fa fa-heart red" aria-hidden="true"></i></button>
                         {% else: %}
                             <button class="is-heart-btn"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
                         {% endif%}

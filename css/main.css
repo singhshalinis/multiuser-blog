@@ -407,6 +407,15 @@ div.is-green-btn:focus button{
     align-items: flex-end;
 }
 
+.blogtitle {
+    width: 70%;
+}
+
+.blogdate {
+    width: 30%;
+    font-size: .5em;
+    text-align: right;
+}
 .blogcontent {
     font-size: 1.12em;
     padding: 0 10px;

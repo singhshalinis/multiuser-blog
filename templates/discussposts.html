@@ -13,7 +13,9 @@
 
 
 {% block content %}
+
 <main class="main-content-color">
+
     <div class="row error">
         <h2>{{error}}</h2>
     </div>
@@ -38,7 +40,6 @@
                 <div class="delete btn is-green-btn btn-ext">
                     <form id="delform" method="post" action="/delete">
                         <input type="hidden" name="postid" value={{post.key().id()}}>
-                        <input type="hidden" name="postkey" value="{{post.key()}}">
                         <button class="" onclick="return delFunc()">Delete</button>
                     </form>
                 </div>
@@ -81,7 +82,7 @@
                     <form id="likeform" method="post" action="/like">
                         <input type="hidden" name="postid" value={{post.key().id()}}>
                         {% if post.key().id() in user_liked: %}
-                            <button><i class="fa fa-heart red" aria-hidden="true"></i></button>
+                            <button class="is-heart-btn"><i class="fa fa-heart red" aria-hidden="true"></i></button>
                         {% else: %}
                             <button class="is-heart-btn"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
                         {% endif%}
@@ -109,6 +110,10 @@
         }
     }
 </script>
+
+<script id="dsq-count-scr" src="//ssdisqus.disqus.com/count.js" async></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script>
 /**

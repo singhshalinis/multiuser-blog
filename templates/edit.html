@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div>
+    <article class="subcontainer postshadoweffect">
         <form method="post">
             <input type="hidden" name="postid" value="{{postid}}">
             <div class="row newtitle">
@@ -29,15 +29,11 @@
                 <textarea rows="15" cols="100" name="content">{{post.content}}</textarea>
             </div>
 
-            <div class="formelements">
-                <button class = "btn is-green-btn sign-btn btn-ext " name="subject" type="submit">Update Post</button>
-            </div>
-            <div class="formelements">
-               <a class = "btn is-green-btn btn-ext" href = "/">Discard Changes</a>
-            </div>
+            <button class = "btn is-green-btn sign-btn btn-ext " name="subject" type="submit">Update Post</button>
+            <a class = "btn is-green-btn btn-ext" href = "/">Discard Changes</a>
 
         </form>
-    </div>
+    </article>
 </main>
 
 <script src='https://cdn.tinymce.com/4/tinymce.min.js'></script>
