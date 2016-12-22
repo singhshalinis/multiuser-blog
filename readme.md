@@ -31,17 +31,23 @@ Package Details (Files involved)
 Below is a brief description of the folders/files that have been used for this application.
 1.  css - main.css contains all styling for the website. responsive.css contains media queries which has been created for organizing the styles but can be completely merged into main.css.
 
-2.  fonts - The website uses "OpenSans-CondLight" and so all font related files are here.
+2.  fonts (folder) - The website uses "OpenSans-CondLight" and so all font related files are here.
 
-3.  images - Contains all images used by the website.
+3.  images (folder) - Contains all images used by the website.
 
-4.  templates - Contains all Jinja templates.
+4.  templates (folder) - Contains all Jinja templates.
 
 5.  app.yaml - Contains app configuration for deployment on Google App Engine.
 
-6.  blog.py - The monolithic python file which contains all logic and powers the website.
+6.  blog.py - The python file which receives requests and lists all handlers.
 
 7.  readme.md - It's me!
+
+8. handlers (a folder) - All web request handling code written in Python.
+
+9. models (a folder) - All models for the datastore.
+
+
 
 
 How to get started
