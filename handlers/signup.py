@@ -6,11 +6,6 @@ from models import BlogUser
 
 import utilities
 
-# For signup validation
-USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
-PASSWORD_RE = re.compile(r"^.{3,20}$")
-EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
-
 
 class SignupHandler(Handler):
     def render_front(self, input_username="", input_password="",
@@ -100,21 +95,19 @@ class SignupHandler(Handler):
                               userexists_error=userexists_error)
 
 
-# For signup validation
-USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
-PASSWORD_RE = re.compile(r"^.{3,20}$")
-EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
-
 # Signup data validation functions
 def valid_username(username):
+    USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
     return USER_RE.match(username)
 
 
 def valid_password(password):
+    PASSWORD_RE = re.compile(r"^.{3,20}$")
     return PASSWORD_RE.match(password)
 
 
 def valid_email(email):
+    EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
     return EMAIL_RE.match(email)
 
 

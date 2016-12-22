@@ -16,6 +16,7 @@ class DeleteHandler(Handler):
         else:
             error = "You are not signed in. Sign in to continue."
             self.redirect("/signin?error=" + str(error))  # TO-DO: Encrypt
+            return
 
         # Get parameters
         postid = self.request.get("postid")
